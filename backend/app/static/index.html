@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CRM AI Analytics</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>CRM AI Analytics</h1>
+        <p>Lead scoring, call insights, and follow-up recommendations</p>
+      </div>
+      <div class="actions">
+        <button id="refreshButton" type="button">Refresh</button>
+        <a href="/docs">API Docs</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="status" class="status">Loading dashboard data...</section>
+
+      <section class="kpi-grid" aria-label="Dashboard summary">
+        <article class="kpi">
+          <span>Total Accounts</span>
+          <strong id="totalAccounts">0</strong>
+        </article>
+        <article class="kpi">
+          <span>Hot Leads</span>
+          <strong id="hotLeads">0</strong>
+        </article>
+        <article class="kpi">
+          <span>High Priority Follow-Ups</span>
+          <strong id="highFollowups">0</strong>
+        </article>
+        <article class="kpi">
+          <span>Total Calls</span>
+          <strong id="totalCalls">0</strong>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel lead-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Lead Scores</h2>
+              <p>Top accounts ranked by explainable AI score</p>
+            </div>
+            <select id="categoryFilter" aria-label="Filter by lead category">
+              <option value="">All categories</option>
+              <option value="Hot">Hot</option>
+              <option value="Warm">Warm</option>
+              <option value="Cold">Cold</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Account</th>
+                  <th>Industry</th>
+                  <th>Score</th>
+                  <th>Category</th>
+                  <th>Why</th>
+                </tr>
+              </thead>
+              <tbody id="leadRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Follow-Up Queue</h2>
+              <p>Recommended next actions</p>
+            </div>
+          </div>
+          <div id="followupList" class="stack"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Call Sentiment</h2>
+              <p>Positive, neutral, and negative call mix</p>
+            </div>
+          </div>
+          <div class="sentiment-bars">
+            <div>
+              <span>Positive</span>
+              <div class="bar"><span id="positiveBar"></span></div>
+              <strong id="positiveCalls">0</strong>
+            </div>
+            <div>
+              <span>Neutral</span>
+              <div class="bar"><span id="neutralBar"></span></div>
+              <strong id="neutralCalls">0</strong>
+            </div>
+            <div>
+              <span>Negative</span>
+              <div class="bar"><span id="negativeBar"></span></div>
+              <strong id="negativeCalls">0</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Call Insights</h2>
+              <p>Generated from deterministic analytics</p>
+            </div>
+          </div>
+          <ul id="insightList" class="insights"></ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
