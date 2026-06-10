@@ -18,7 +18,8 @@ _sessionmaker: async_sessionmaker[AsyncSession] | None = None
 def get_engine() -> AsyncEngine:
     global _engine
     if _engine is None:
-        _engine = create_async_engine(settings.database_url, pool_pre_ping=True)
+        pool_pre_ping = not settings.database_url.startswith("mysql+aiomysql://")
+        _engine = create_async_engine(settings.database_url, pool_pre_ping=pool_pre_ping)
     return _engine
 
 

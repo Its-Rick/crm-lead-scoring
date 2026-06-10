@@ -172,34 +172,244 @@ main {
   font-size: 13px;
 }
 
-.table-wrap {
-  overflow-x: auto;
+.score {
+  font-weight: 760;
+  color: var(--ink);
 }
 
-table {
+.lead-workspace {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(320px, 1.05fr);
+  min-height: 680px;
+}
+
+.lead-cards {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 16px;
+  border-right: 1px solid var(--line);
+  max-height: 760px;
+  overflow-y: auto;
+}
+
+.lead-card {
+  display: grid;
+  gap: 12px;
   width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 14px 18px;
+  min-height: 112px;
+  padding: 14px;
   text-align: left;
-  border-bottom: 1px solid var(--line);
-  vertical-align: top;
-  font-size: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfe;
+  color: var(--ink);
+  cursor: pointer;
 }
 
-th {
-  color: #526076;
+.lead-card:hover,
+.lead-card.selected {
+  border-color: var(--brand);
+  box-shadow: 0 10px 22px rgba(23, 107, 135, 0.13);
+}
+
+.lead-card.selected {
+  background: #f3fbfd;
+}
+
+.lead-card-top,
+.lead-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lead-card-top {
+  align-items: flex-start;
+}
+
+.lead-card-bottom {
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.lead-card strong {
+  display: block;
+  font-size: 15px;
+}
+
+.lead-card small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
   font-size: 12px;
+}
+
+.score-badge,
+.score-ring {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.score-badge {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.score-ring {
+  width: 68px;
+  height: 68px;
+  font-size: 24px;
+}
+
+.score-badge.Hot,
+.score-ring.Hot {
+  background: #fff0ee;
+  color: var(--hot);
+}
+
+.score-badge.Warm,
+.score-ring.Warm {
+  background: #fff6e5;
+  color: var(--warm);
+}
+
+.score-badge.Cold,
+.score-ring.Cold {
+  background: #ecf8f1;
+  color: var(--cold);
+}
+
+.lead-details {
+  padding: 18px;
+  background: #ffffff;
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.detail-header h3 {
+  margin: 4px 0 0;
+  font-size: 22px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 720;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
-.score {
-  font-weight: 760;
+.score-comment {
+  padding: 14px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.score-comment strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.score-comment.Hot {
+  background: #fff8f7;
+  border-color: #ffd6d1;
+}
+
+.score-comment.Warm {
+  background: #fffaf0;
+  border-color: #ffe0a3;
+}
+
+.score-comment.Cold {
+  background: #f4fbf7;
+  border-color: #cbead8;
+}
+
+.factor-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.factor-row {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.factor-row span,
+.factor-row strong {
+  display: block;
+}
+
+.factor-row span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.factor-row strong {
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.factor-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf1f6;
+}
+
+.factor-track span {
+  display: block;
+  height: 100%;
+  background: var(--brand);
+}
+
+.explanation-block {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.explanation-block + .explanation-block {
+  margin-top: 14px;
+}
+
+.explanation-block h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.explanation-block ul {
+  margin: 0;
+  padding-left: 20px;
   color: var(--ink);
+}
+
+.explanation-block li {
+  margin-bottom: 6px;
+}
+
+.empty-state {
+  display: grid;
+  min-height: 160px;
+  place-items: center;
+  padding: 18px;
+  color: var(--muted);
+  text-align: center;
 }
 
 .pill {
@@ -317,7 +527,18 @@ th {
   }
 
   .kpi-grid,
-  .content-grid {
+  .content-grid,
+  .lead-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-cards {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    max-height: none;
+  }
+
+  .factor-row {
     grid-template-columns: 1fr;
   }
 

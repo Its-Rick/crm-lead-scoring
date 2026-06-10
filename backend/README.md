@@ -38,6 +38,63 @@ Open `http://127.0.0.1:8000/docs`.
 
 The basic dashboard is available at `http://127.0.0.1:8000/`.
 
+## Use Existing Local MySQL Data
+
+If your CRM tables already exist in MySQL, do not run `sql/schema.sql` and do not run the Faker seed script. Point the backend at your existing database instead.
+
+1. Install dependencies:
+
+```bash
+cd backend
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+2. Create or update `.env`:
+
+```env
+DATABASE_URL=mysql+aiomysql://MYSQL_USER:MYSQL_PASSWORD@127.0.0.1:3306/MYSQL_DATABASE
+ENABLE_OPENAI_INSIGHTS=false
+OPENAI_API_KEY=
+CACHE_TTL_SECONDS=300
+```
+
+Example:
+
+```env
+DATABASE_URL=mysql+aiomysql://root:password@127.0.0.1:3306/sangam_crm
+```
+
+3. Confirm these tables exist in MySQL:
+
+```sql
+SHOW TABLES;
+DESCRIBE accounts;
+DESCRIBE calls;
+DESCRIBE activities_rel;
+```
+
+The analytics require `activities_rel` to connect accounts to calls:
+
+```text
+activities_rel.parent_id = accounts.id
+activities_rel.activity_id = calls.id
+```
+
+For the provided `sangam_crm` dump, `activities_rel` is not present and `calls` has no account/contact foreign key. In that schema, account lead scores use account profile fields plus `account_opportunity`, `account_lead`, and `account_contact` activity. Call insights still use the global `calls` table, but calls are not attributed to individual accounts unless a relationship column/table is added.
+
+4. Start the API:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/
+```
+
 ## APIs
 
 - `GET /health`

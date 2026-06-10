@@ -45,7 +45,7 @@
           <div class="panel-heading">
             <div>
               <h2>Lead Scores</h2>
-              <p>Top accounts ranked by explainable AI score</p>
+              <p>Select a lead to inspect score factors</p>
             </div>
             <select id="categoryFilter" aria-label="Filter by lead category">
               <option value="">All categories</option>
@@ -54,19 +54,13 @@
               <option value="Cold">Cold</option>
             </select>
           </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Account</th>
-                  <th>Industry</th>
-                  <th>Score</th>
-                  <th>Category</th>
-                  <th>Why</th>
-                </tr>
-              </thead>
-              <tbody id="leadRows"></tbody>
-            </table>
+          <div class="lead-workspace">
+            <div id="leadCards" class="lead-cards" aria-label="Lead cards"></div>
+            <aside id="leadDetails" class="lead-details" aria-live="polite">
+              <div class="empty-state">
+                Select a lead card to view score factors.
+              </div>
+            </aside>
           </div>
         </article>
 
